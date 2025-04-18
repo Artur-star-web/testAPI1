@@ -13,7 +13,6 @@ import static com.codeborne.selenide.Selenide.open;
 public class AuthTest {
     @BeforeEach
     void setUp() {
-        Configuration.headless = false; // если нужно без UI — true
         open("http://localhost:9999");
     }
 
