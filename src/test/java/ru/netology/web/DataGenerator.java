@@ -22,6 +22,25 @@ public class DataGenerator {
         String status;
     }
 
+    public static String generateInvalidLogin(User validUser) {
+        Faker faker = new Faker();
+        String invalidLogin;
+        do {
+            invalidLogin = faker.name().username();
+        } while (invalidLogin.equals(validUser.getLogin()));
+        return invalidLogin;
+    }
+
+    public static String generateInvalidPassword(User validUser) {
+        Faker faker = new Faker();
+        String invalidPassword;
+        do {
+            invalidPassword = faker.internet().password();
+        } while (invalidPassword.equals(validUser.getPassword()));
+        return invalidPassword;
+    }
+
+
     private static final RequestSpecification requestSpec = new RequestSpecBuilder()
             .setBaseUri("http://localhost")
             .setPort(9999)

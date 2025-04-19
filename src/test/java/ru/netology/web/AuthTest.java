@@ -29,7 +29,7 @@ public class AuthTest {
     }
 
     @Test
-    @DisplayName("Вход с заблокированным пользователем")
+    @DisplayName("✅ Вход с заблокированным пользователем")
     void shouldNotLoginWithBlockedUser() {
         var user = DataGenerator.generateUser("blocked");
 
@@ -44,12 +44,13 @@ public class AuthTest {
     }
 
     @Test
-    @DisplayName("Вход с несуществующим логином")
+    @DisplayName("✅ Вход с несуществующим логином")
     void shouldNotLoginWithInvalidLogin() {
         var user = DataGenerator.generateUser("active");
+        var invalidLogin = DataGenerator.generateInvalidLogin(user);
 
         open("http://localhost:9999");
-        $("[data-test-id='login'] input").setValue("wrongLogin");
+        $("[data-test-id='login'] input").setValue(invalidLogin);
         $("[data-test-id='password'] input").setValue(user.getPassword());
         $("[data-test-id='action-login']").click();
 
@@ -59,13 +60,14 @@ public class AuthTest {
     }
 
     @Test
-    @DisplayName("Вход с неверным паролем")
+    @DisplayName("✅ Вход с неверным паролем")
     void shouldNotLoginWithInvalidPassword() {
         var user = DataGenerator.generateUser("active");
+        var invalidPassword = DataGenerator.generateInvalidPassword(user);
 
         open("http://localhost:9999");
         $("[data-test-id='login'] input").setValue(user.getLogin());
-        $("[data-test-id='password'] input").setValue("wrongPassword");
+        $("[data-test-id='password'] input").setValue(invalidPassword);
         $("[data-test-id='action-login']").click();
 
         $("[data-test-id='error-notification']")
