@@ -24,20 +24,24 @@ public class DataGenerator {
 
     public static String generateInvalidLogin(User validUser) {
         Faker faker = new Faker();
-        String invalidLogin;
-        do {
-            invalidLogin = faker.name().username();
-        } while (invalidLogin.equals(validUser.getLogin()));
-        return invalidLogin;
+        for (int i = 0; i < 10; i++) {
+            String login = faker.name().username();
+            if (!login.equals(validUser.getLogin())) {
+                return login;
+            }
+        }
+        throw new RuntimeException("Не удалось сгенерировать уникальный логин за 10 попыток");
     }
 
     public static String generateInvalidPassword(User validUser) {
         Faker faker = new Faker();
-        String invalidPassword;
-        do {
-            invalidPassword = faker.internet().password();
-        } while (invalidPassword.equals(validUser.getPassword()));
-        return invalidPassword;
+        for (int i = 0; i < 10; i++) {
+            String password = faker.internet().password();
+            if (!password.equals(validUser.getPassword())) {
+                return password;
+            }
+        }
+        throw new RuntimeException("Не удалось сгенерировать уникальный пароль за 10 попыток");
     }
 
 

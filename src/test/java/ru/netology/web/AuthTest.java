@@ -29,7 +29,7 @@ public class AuthTest {
     }
 
     @Test
-    @DisplayName("✅ Вход с заблокированным пользователем")
+    @DisplayName("❌ Вход с заблокированным пользователем")
     void shouldNotLoginWithBlockedUser() {
         var user = DataGenerator.generateUser("blocked");
 
@@ -44,7 +44,7 @@ public class AuthTest {
     }
 
     @Test
-    @DisplayName("✅ Вход с несуществующим логином")
+    @DisplayName("❌ Вход с неверным логином")
     void shouldNotLoginWithInvalidLogin() {
         var user = DataGenerator.generateUser("active");
         var invalidLogin = DataGenerator.generateInvalidLogin(user);
@@ -60,7 +60,7 @@ public class AuthTest {
     }
 
     @Test
-    @DisplayName("✅ Вход с неверным паролем")
+    @DisplayName("❌ Вход с неверным паролем")
     void shouldNotLoginWithInvalidPassword() {
         var user = DataGenerator.generateUser("active");
         var invalidPassword = DataGenerator.generateInvalidPassword(user);
